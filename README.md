@@ -44,4 +44,5 @@ Run compiled file: `vvp <path-to-file>`
 Open waveform dump (gtkwave is used here): `gtkwave <path-to-vcd-file>`
 
 To compile **ALL** files in the `test` directory, run the provided `build.sh` script
+
 To run **ALL** files in the `test` directory, run the provided `run.sh` script
