@@ -1,5 +1,5 @@
 // D-FF with asynchronous preset and clear
-module dff(q, qbar, d, preset, clear, clk);
+module dff_posedge(q, qbar, d, preset, clear, clk);
 	input d, preset, clear, clk;
 	output reg q;
 	output qbar;
