@@ -1,6 +1,7 @@
 # sap
 SAP Computers in Verilog
-Digital Design - Day1
+Day 1: Digital Design, Intro to SAP architecture
+Day 2: Build SAP-1
 
 # Workflow
 * Please use `iverilog` to compile and test your code. To view waveforms, use a
