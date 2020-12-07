@@ -9,12 +9,12 @@ module dff_posedge(q, qbar, d, preset, clear, clk);
 
 	assign qbar = ~q;
 
-	always @(posedge preset or posedge clear or posedge clk)
+	always @(posedge clk or preset or clear)
 	begin
-		if(preset == 1)
-			q <= 1'b1;
-		else if(clear == 1)
+		if(clear)
 			q <= 1'b0;
+		else if(preset)
+			q <= 1'b1;
 		else
 			q <= d;
 	end

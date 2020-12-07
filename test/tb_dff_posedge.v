@@ -8,11 +8,12 @@ module tb_dff_posedge;
 	begin
 		$dumpfile("../simulation/tb_dff_posedge.vcd");
 		$dumpvars(0, tb_dff_posedge);
-		preset = 1'b0;
-		clear = 1'b0;
+		preset = 1'b1;
+		clear = 1'b1;
 		d = 1'b1;
 		#10;
 
+		clear = 1'b0;
 		d = 1'b0;
 		#10;
 
