@@ -29,7 +29,7 @@ SAP Computers in Verilog
 	* Only **ONE** Verilog module per `.v` file
 * All Verilog test-benches go in the `test` directory
 	* Filenames should be prefixed with `tb`
-		* E.g. `dff_posedge.v -> tb_dff_posedge.v`
+		* E.g. `dff_posedge.v - tb_dff_posedge.v`
 	* Output files after compilation also go here, give them the `.out` extension
 * All Verilog simulation output (`vcd` dumps for waveforms etc.) go in the
   `simulation` directory
@@ -46,3 +46,37 @@ Open waveform dump (gtkwave is used here): `gtkwave <path-to-vcd-file>`
 To compile **ALL** files in the `test` directory, run the provided `build_all.sh` script
 
 To run **ALL** files in the `test` directory, run the provided `run_all.sh` script
+
+# Notes
+
+## Control signals
+
+* PC
+	* C_P - Count enable
+	* E_P - Output enable
+	* CLR - Async reset
+
+* MAR
+	* L_M' - Load
+
+* RAM
+	* CE' - Chip enable
+
+* IR
+	* L_I' - Load
+	* E_I' - Output enable
+	* CLR - Async clear
+
+* ACCUMULATOR
+	* E_A - Output enable
+	* L_A - Load
+
+* ADDER/SUBTRACTOR
+	* S_U - Subtract
+	* E_U - Output enable
+
+* B REG
+	* L_B' - Load B
+
+* OUTPUT REG
+	* L_O' - Load output
