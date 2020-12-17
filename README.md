@@ -20,11 +20,11 @@ SAP Computers in Verilog
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | (PR) 5:30 | Recap of day 1                                                                                                                                                                          |
 | (PR) 5:35 | SAP-1 Architecture Block diagram                                                                                                                                                        |
-| (PR) 5:45 | Adder-Subtractor                                                                                                                                                                        |
-| (SP) 6:00 | Tri-state registers (MAR, IR, Acc, B, Out)                                                                                                                                              |
-| (RP) 6:15 | PC                                                                                                                                                                                      |
-| (RP) 6:25 | Memory (ROM)                                                                                                                                                                            |
-| (RP) 6:35 | Control unit and instruction set (instruction structure, how to write a program, decode) (Demo program, manually set control bits) (Assignment- write a simple program, hype for day 3) |
+| (PR) 5:45 | PC                                                                                                                                                                                      |
+| (PR) 6:00 | Adder-Subtractor                                                                                                                                                                        |
+| (SP) 6:15 | Tri-state registers (MAR, IR, Acc, B, Out)                                                                                                                                              |
+| (RP) 6:30 | Memory (ROM)                                                                                                                                                                            |
+| (RP) 6:45 | Control unit and instruction set (instruction structure, how to write a program, decode) (Demo program, manually set control bits) (Assignment- write a simple program, hype for day 3) |
 
 * Day 3
 
