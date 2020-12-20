@@ -1,0 +1,137 @@
+= Simple-As-Possible Computers
+:source-highlighter: rouge
+:mathematical-format: svg
+:stem: latexmath
+:reproducible:
+:listing-caption: Listing
+:toc:
+// Uncomment next line to add a title page (or set doctype to book)
+:title-page:
+// Uncomment next line to set page size (default is A4)
+:pdf-page-size: A4
+
+== SAP-1
+
+=== Control Signals
+[%header, cols="2*^"]
+|===
+|Old name
+|New name
+
+|C~P~
+|inc
+
+|E~P~
+|pc_out_en
+
+|++~++L~M~
+|~ld_mar
+
+|~CE
+|~mem_out_en
+
+|++~++L~I~
+|~ld_ir
+
+|++~++E~I~
+|~ir_out_en
+
+|++~++L~A~
+|~ld_acc
+
+|E~A~
+|acc_out_en
+
+|S~U~
+|sub_add
+
+|E~U~
+|subadd_out_en
+
+|++~++L~B~
+|~ld_b_reg
+
+|++~++L~O~
+|~ld_out_reg
+|===
+
+=== T-state active signals
+
+// [%header, cols="2*^"]
+// |===
+// |T-state
+//
+// |===
+
+* *T~1~ state* (Address state)
+** `pc_out_en`
+** `~ld_mar`
+
+* *T~2~ state* (Increment state)
+** `inc`
+
+* *T~3~ state* (Memory state)
+** `~mem_out_en`
+** `~ld_ir`
+
+* *`LDA`* routine
+** *T~4~ state*
+*** `~ir_out_en`
+*** `~ld_mar`
+** *T~5~ state*
+*** `~mem_out_en`
+*** `~ld_acc`
+** *T~6~ state*
+*** NOP
+
+* *`ADD`* routine
+** *T~4~ state*
+*** `~ir_out_en`
+*** `~ld_mar`
+** *T~5~ state*
+*** `~mem_out_en`
+*** `~ld_b_reg`
+** *T~6~ state*
+*** `subadd_out_en`
+*** `~ld_acc`
+
+* *`SUB`* routine
+** *T~4~ state*
+*** `~ir_out_en`
+*** `~ld_mar`
+** *T~5~ state*
+*** `~mem_out_en`
+*** `~ld_b_reg`
+** *T~6~ state*
+*** `sub_add`
+*** `subadd_out_en`
+*** `~ld_acc`
+
+* *`OUT`* routine
+** *T~4~ state*
+*** `acc_out_en`
+*** `~ld_out_reg`
+** *T~5~ state*
+*** `~NOP`
+** *T~6~ state*
+*** `NOP`
+
+<<<
+
+=== Control logic
+
+[source,verilog]
+----
+inc = t2;
+pc_out_en = t1;
+~ld_mar = ~(t1 || (t4 && (lda || add || sub)));
+~mem_out_en = ~(t3 || (t4 && (lda || add || sub)));
+~ld_ir = ~t3;
+~ir_out_en = ~(t4 && (lda || add || sub));
+~ld_acc = ~((t5 && lda) || (t6 && (add || sub)));
+acc_out_en = t4 && out;
+sub_add = t6 && sub;
+subadd_out_en = t6 && (add || sub);
+~ld_b_reg = ~(t5 && (add || sub));
+~ld_out_reg = ~(t4 && out);
+----
