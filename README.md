@@ -1,39 +1,6 @@
 # sap
 SAP Computers in Verilog
 
-## Plan
-
-* Day 1
-
-| Time      | Topic                                                          |
-|-----------|----------------------------------------------------------------|
-| (RP) 5:30 | Intro - Lay out objectives of workshop                         |
-| (SP) 5:35 | Binary, Hex system, 2's complement arithmetic                  |
-| (SP) 5:45 | Combinational logic recap (Adders, MUX/DEMUX), Tri-state logic |
-| (SP) 6:05 | D-ff                                                           |
-| (SP) 6:15 | 4 bit PIPO reg using D-ff                                      |
-| (PR) 6:45 | Bus architecture                                               |
-
-* Day 2
-
-| Time      | Topic                                                                                                                                                                                   |
-|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| (PR) 5:30 | Recap of day 1                                                                                                                                                                          |
-| (PR) 5:35 | SAP-1 Architecture Block diagram                                                                                                                                                        |
-| (PR) 5:45 | PC                                                                                                                                                                                      |
-| (PR) 6:00 | Adder-Subtractor                                                                                                                                                                        |
-| (SP) 6:15 | Tri-state registers (MAR, IR, Acc, B, Out)                                                                                                                                              |
-| (RP) 6:30 | Memory (ROM)                                                                                                                                                                            |
-| (RP) 6:45 | Control unit and instruction set (instruction structure, how to write a program, decode) (Demo program, manually set control bits) (Assignment- write a simple program, hype for day 3) |
-
-* Day 3
-
-| Time      | Topic                                                   |
-|-----------|---------------------------------------------------------|
-| (RP) 5:30 | Recap of day 2                                          |
-| (RP) 5:35 | Fetch-Execute cycles and T-states                       |
-| (PR) 6:35 | Making the control unit and show a demo program running |
-
 # Workflow
 * Please use `iverilog` to compile and test your code. To view waveforms, use a
   program like `gtkwave`.
