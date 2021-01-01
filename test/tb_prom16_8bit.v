@@ -21,29 +21,30 @@ module tb_prom16_8bit();
 		clr = 0;
 		low_load = 0;
 		low_o_en = 1;
+		data_in = 8'hff;
 		for(i = 0; i < 16; i = i+1)
 		begin
-			data_in = i;
 			addr = i;
+			$monitor("data_in=%d | addr=%d", data_in, addr);
 			#10;
-			$display("data_in=%d | addr=%d", data_in, addr);
 		end
 
-		clr = 0;
 		low_load = 1;
 		low_o_en = 0;
 		for(i = 0; i < 16; i = i+1)
 		begin
 			addr = i;
-			$display("data_out=%d | addr=%d", data_out, addr);
+			$monitor("data_out=%d | addr=%d", data_out, addr);
 			#10;
 		end
+		low_load = 1;
+		low_o_en = 1;
 	end
 
 	initial
 	begin
 		clk = 1'b1;
-		repeat(40)
+		repeat(350)
 		begin
 			clk = ~clk;
 			#10;
