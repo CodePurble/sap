@@ -1,8 +1,7 @@
 module decoder_4line_16line(
 	input [3:0] sel,
-	output [15:0] out
+	output reg [15:0] out
 );
-	reg [15:0] out;
 	always @(sel)
 	begin
 		case(sel)
