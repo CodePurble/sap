@@ -38,6 +38,6 @@ module tb_reg_8bit;
 
 	initial
 	begin
-		$monitor("clk = %b | in = %b | out = %b", clk, in, out);
+		$monitor("low_o_en = %b | in = %b | out = %b", low_o_en, in, out);
 	end
 endmodule
