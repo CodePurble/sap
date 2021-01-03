@@ -1,3 +1,4 @@
+// FIXME: not sure if inputs are even being stored. I can't take this anymore -_-
 module prom16_8bit(
 	input [7:0] data_in,
 	input [3:0] addr,
