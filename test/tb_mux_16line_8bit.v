@@ -34,7 +34,10 @@ module tb_mux_16line_8bit();
 		begin
 			sel = i;
 			#10;
-			$display("sel=%2d\nout=%2d\n", sel, out);
 		end
+	end
+	initial
+	begin
+		$monitor("sel=%2d\nout=%2d\n", sel, out);
 	end
 endmodule

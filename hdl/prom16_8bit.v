@@ -9,20 +9,22 @@ module prom16_8bit(
 	output tri [7:0] data_out
 );
 	wire [15:0] decoder_out;
-	wire [15:0] low_reg_i_en;
+	wire [15:0] not_decoder_out;
+	wire demux_o_en;
 	wire [7:0] mux_in [0:15];
 
-	decoder_4line_16line dec(.sel(addr), .out(decoder_out));
+	not g(demux_o_en, low_load);
+	decoder_4line_16line dec(.sel(addr), .out(decoder_out), .o_en(demux_o_en));
 
 	// use verilog generate for loop to generate 16 8-bit regs
 	genvar i;
 	generate
 		for(i = 0; i < 16; i = i+1)
 		begin
-			nand g(low_reg_i_en[i], low_load, decoder_out[i]);
+			not g(not_decoder_out[i], decoder_out[i]);
 			reg_8bit reg_array(
 				.in(data_in),
-				.low_i_en(low_reg_i_en[i]),
+				.low_i_en(not_decoder_out[i]),
 				.low_o_en(low_o_en),
 				.async_reset(clr),
 				.clk(clk),

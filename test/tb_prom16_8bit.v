@@ -18,27 +18,42 @@ module tb_prom16_8bit();
 	integer i;
 	initial
 	begin
+		clr = 1;
+		#10;
 		clr = 0;
+
+		// Clear test
+		// low_load = 1;
+		// low_o_en = 0;
+		// for(i = 0; i < 16; i = i+1)
+		// begin
+		//     addr = i;
+		//     $monitor("data_out=%x | addr=%d", data_out, addr);
+		//     #10;
+		// end
+
+		// Load test
+		data_in = 8'h11;
 		low_load = 0;
 		low_o_en = 1;
-		data_in = 8'hff;
 		for(i = 0; i < 16; i = i+1)
 		begin
 			addr = i;
-			$monitor("data_in=%d | addr=%d", data_in, addr);
+			// $monitor("data_in=%d | addr=%d", data_in, addr);
 			#10;
 		end
 
+		// Read test
 		low_load = 1;
 		low_o_en = 0;
 		for(i = 0; i < 16; i = i+1)
 		begin
 			addr = i;
-			$monitor("data_out=%d | addr=%d", data_out, addr);
+			$monitor("data_out=%x | addr=%d", data_out, addr);
 			#10;
 		end
-		low_load = 1;
-		low_o_en = 1;
+		// low_load = 1;
+		// low_o_en = 1;
 	end
 
 	initial
