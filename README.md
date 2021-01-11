@@ -34,15 +34,29 @@ SAP Computers in Verilog
 Do take a look at the `dff_posedge` example module.
 
 ## Compilation
-Compile: `iverilog -y<path-to-hdl-dir> -Wall -o <path-to-output-file> <path-to-input-file>`
+There are two helper scripts to simplify this step
 
-Run compiled file: `vvp <path-to-file>`
+To compile, use the `compile.sh` script. Usage is as follows:
 
-Open waveform dump (gtkwave is used here): `gtkwave <path-to-vcd-file>`
+```sh
+# To compile all files in the test/ directory
+$ ./compile.sh
 
-To compile **ALL** files in the `test` directory, run the provided `build_all.sh` script
+# To compile select files
+$ ./compile.sh FILE1 FILE2 ...
+```
 
-To run **ALL** files in the `test` directory, run the provided `run_all.sh` script
+To run compiled files, use the `run.sh` script. Usage is as follows:
+
+```sh
+# To run all compiled files in the test/ directory
+$ ./run.sh
+
+# To run select files
+$ ./run.sh FILE1 FILE2 ...
+```
+
+To open waveform dump (gtkwave is used here): `gtkwave <path-to-vcd-file>`
 
 # Notes
 
