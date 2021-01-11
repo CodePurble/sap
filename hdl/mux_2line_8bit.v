@@ -2,7 +2,7 @@
 module mux_2line_8bit(
 	input [7:0] in0,
 	input [7:0] in1,
-	input        sel,
+	input sel,
 	output reg [7:0] out
 );
 	always @(
