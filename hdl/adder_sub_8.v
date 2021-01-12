@@ -12,7 +12,7 @@ module adder_sub_8(
 		.in(B), .sel(sub), .out0(dmux0), .out1(dmux1)
 	);
 
-	assign tc_out = ~dmux1 +  8'b00000001;
+	assign tc_out = ~dmux1 +  8'b00000001; // Take 2's complement
 
 	mux_2line_8bit mux1(
 		.in0(dmux0), .in1(tc_out),
