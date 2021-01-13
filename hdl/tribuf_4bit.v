@@ -1,8 +1,8 @@
 // 4-bit tristate buffer
-module tribuf_4bit(in, out, low_enable);
+module tribuf_4bit(in, out, enable);
 	input [3:0] in; // Input word
-	input low_enable; // Enable (active low)
+	input enable; // Enable (active high)
 	output tri [3:0] out; // Output word
-	assign out = low_enable ? 4'bzzzz : in;
+	assign out = enable ? in : 4'bzzzz;
 endmodule
 
