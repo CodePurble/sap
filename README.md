@@ -1,6 +1,8 @@
 # sap
 SAP Computers in Verilog
 
+**(Note that this project is still a WIP and may not work as inteded)**
+
 # Workflow
 * Please use `iverilog` to compile and test your code. To view waveforms, use a
   program like `gtkwave`.
