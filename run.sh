@@ -6,6 +6,8 @@ run()
 	vvp $1
 }
 
+[[ -d simulation ]] || mkdir simulation
+
 if [[ $# == 0 ]]; then
 	TEST_DIR="./test"
 
