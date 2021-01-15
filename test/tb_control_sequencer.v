@@ -2,26 +2,26 @@ module tb_control_sequencer();
     reg clk,res;
     reg [3:0] op_code;
     wire inc;
-	wire pc_out_en;
-	wire low_ld_mar;
-	wire low_mem_out_en;
-	wire low_ld_ir;
-	wire low_ir_out_en;
-	wire low_ld_acc;
-	wire acc_out_en;
-	wire sub_add;
-	wire subadd_out_en;
-	wire low_ld_b_reg;
-	wire low_ld_out_reg;
+    wire pc_out_en;
+    wire low_ld_mar;
+    wire low_mem_out_en;
+    wire low_ld_ir;
+    wire low_ir_out_en;
+    wire low_ld_acc;
+    wire acc_out_en;
+    wire sub_add;
+    wire subadd_out_en;
+    wire low_ld_b_reg;
+    wire low_ld_out_reg;
 
     control_sequencer uut(
         .op_code(op_code),
         .clk(clk),
         .res(res),
         .inc(inc),
-	    .pc_out_en(pc_out_en),
-    	.low_ld_mar(low_ld_mar),
-	    .low_mem_out_en(low_mem_out_en),
+        .pc_out_en(pc_out_en),
+        .low_ld_mar(low_ld_mar),
+        .low_mem_out_en(low_mem_out_en),
         .low_ld_ir(low_ld_ir),
         .low_ir_out_en(low_ir_out_en),
         .low_ld_acc(low_ld_acc),
@@ -40,18 +40,17 @@ module tb_control_sequencer();
         #10;
         res = 0;
         #10;
-
         op_code = 4'b0000;
         #10;
         op_code = 4'b0001;
         #10;
         op_code = 4'b0010;
         #10;
-       // op_code = 4'b1110;
-       // #10;
+        // op_code = 4'b1110;
+        // #10;
         op_code = 4'b1111;
         #10;
-		$finish;
+        $finish;
     end
 
     initial
