@@ -8,13 +8,13 @@ initial
 always
     #5 clk = ~clk;
 
-initial 
+initial
     begin
         $dumpfile("simulation/tb_program_counter.vcd");
         $dumpvars(0, tb_program_counter);
     end
 
-initial 
+initial
     begin
         #2 clr = 1'b1;
         #10 clr = 1'b0;
@@ -24,7 +24,7 @@ initial
         #300 $finish;
     end
 
-initial 
+initial
     begin
         $monitor("Out : %x", out);
     end
