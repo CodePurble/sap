@@ -1,31 +1,37 @@
 module tb_program_counter();
     reg cin, inc, clk, pc_out_en, clr;
     wire [3:0] out;
+    program_counter uut(
+        .inc(inc), .clk(clk), .pc_out_en(pc_out_en), .clr(clr), .out(out)
+    );
 
-initial
-    clk = 1'b0;
-
-always
-    #5 clk = ~clk;
-
-initial
+    initial
     begin
-        $dumpfile("simulation/tb_program_counter.vcd");
+        clk = 1'b0;
+    end
+
+    always
+    begin
+        #5 clk = ~clk;
+    end
+
+    initial
+    begin
+        $dumpfile("../simulation/tb_program_counter.vcd");
         $dumpvars(0, tb_program_counter);
     end
 
-initial
+    initial
     begin
-        #2 clr = 1'b1;
-        #10 clr = 1'b0;
-        #10 pc_out_en = 1'b1;
-        #10 pc_out_en = 1'b0;
+        #2 pc_out_en = 1'b1;
+        #10 clr = 1'b1;
         #10 inc = 1'b1;
-        #300 $finish;
+        #10 clr = 1'b0;
+        #100 $finish;
     end
 
-initial
+    initial
     begin
-        $monitor("Out : %x", out);
+        $monitor("out:%b", out);
     end
 endmodule

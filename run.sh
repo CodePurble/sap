@@ -13,7 +13,7 @@ if [[ $# == 0 ]]; then
 
     cd $TEST_DIR || exit 1
 
-    echo -e "\033[1mBuilding all\n $1\033[0m"
+    echo -e "\033[1mRunning all testbenches\n $1\033[0m"
 
     for file in *.out; do
         run $file
