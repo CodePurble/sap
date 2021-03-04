@@ -1,5 +1,5 @@
 module tb_program_counter();
-    reg cin, inc, clk, pc_out_en, clr;
+    reg inc, clk, pc_out_en, clr;
     wire [3:0] out;
     program_counter uut(
         .inc(inc), .clk(clk), .pc_out_en(pc_out_en), .clr(clr), .out(out)

@@ -8,7 +8,7 @@ module tb_decoder_4line_16line();
     integer i;
     initial
     begin
-        o_en = 0;
+        o_en = 1;
         for(i = 0; i < 16; i = i+1)
         begin
             sel = i;

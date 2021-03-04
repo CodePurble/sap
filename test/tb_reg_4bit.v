@@ -4,43 +4,34 @@ module tb_reg_4bit();
     wire [3:0] out;
 
     reg_4bit uut(
-        .in(in), .out(out), .low_i_en(low_i_en), .async_reset(async_reset), .clk(clk)
+        .in(in), .out(out), .low_i_en(low_i_en),
+        .async_reset(async_reset), .clk(clk)
     );
 
     initial
     begin
-        //  $dumpfile("../simulation/tb_reg_4bit.vcd");
-        //  $dumpvars(0, tb_reg_4bit);
+        clk = 0;
+    end
 
-        async_reset = 1'b1;
-        low_i_en = 1'b0;
-        //low_o_en = 1'b1;
-        in = 4'b1111;
-        #10;
-
-        in = 4'b1010;
-        //low_o_en = 1'b0;
-        #10;
-
-        async_reset = 1'b0;
-        low_i_en = 1'b0;
-        //low_o_en = 1'b0;
-        #10;
-
-        in = 4'b1111;
-        low_i_en = 1'b0;
-        //low_o_en = 1'b0;
-        #10;
+    always
+    begin
+        #5 clk = ~clk;
     end
 
     initial
     begin
-        clk = 1'b0;
-        repeat(5)
-        begin
-            clk = ~clk;
-            #10;
-        end
+        $dumpfile("../simulation/tb_reg_4bit.vcd");
+        $dumpvars(0, tb_reg_4bit);
+
+        #2 async_reset = 1'b1;
+        #10 low_i_en = 1'b0;
+        #10 in = 4'b1111;
+        #10 in = 4'b1010;
+        #10 async_reset = 1'b0;
+        #10 low_i_en = 1'b0;
+        #10 in = 4'b1111;
+        #10 low_i_en = 1'b0;
+        #10 $finish;
     end
 
     initial

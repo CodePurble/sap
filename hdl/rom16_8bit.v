@@ -1,10 +1,9 @@
 module rom16_8bit(
     input [3:0] addr,
-    input [7:0] data_in,
     input low_o_en,
     output tri reg [7:0] data_out
 );
-    always @(data_in or addr or low_o_en)
+    always @(addr or low_o_en)
     begin
         if(low_o_en)
         begin
