@@ -20,6 +20,7 @@ if [[ $# == 0 ]]; then
     done
 else
     for arg; do
+        cd $(dirname arg)
         run $arg
     done
 fi
