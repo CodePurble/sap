@@ -53,16 +53,16 @@ module control_sequencer(
     // assign low_ir_out_en = ~(t[3] & ((add | lda | sub)));
     // assign low_ld_acc = ~((t[4] & lda) | (t[5] & (add | sub)));
 
-    assign inc = t[1];
-    assign pc_out_en = t[0];
-    assign low_ld_ir = ~t[2];
-    assign acc_out_en = t[3] & out;
-    assign sub_add = t[5] & sub;
-    assign subadd_out_en = t[5] & (add | sub);
-    assign low_ld_b_reg = ~(t[4] & (add | sub));
-    assign low_ld_out_reg = ~(t[3] & out);
-    assign low_ld_mar = ~(t[0] | (t[3] & (add | lda | sub)));
-    assign low_mem_out_en = ~(t[2] | (t[4] & (add | lda | sub)));
-    assign low_ir_out_en = ~(t[3] & ((add | lda | sub)));
-    assign low_ld_acc = ~((t[4] & lda) | (t[5] & (add | sub)));
+    assign inc = t[4];
+    assign pc_out_en = t[5];
+    assign low_ld_mar = ~(t[5] | (t[2] & (add | lda | sub)));
+    assign low_mem_out_en = ~(t[3] | (t[1] & (add | lda | sub)));
+    assign low_ld_ir = ~t[3];
+    assign low_ir_out_en = ~(t[2] & ((add | lda | sub)));
+    assign low_ld_acc = ~((t[1] & lda) | (t[0] & (add | sub)));
+    assign acc_out_en = t[2] & out;
+    assign sub_add = t[0] & sub;
+    assign subadd_out_en = t[0] & (add | sub);
+    assign low_ld_b_reg = ~(t[1] & (add | sub));
+    assign low_ld_out_reg = ~(t[2] & out);
 endmodule

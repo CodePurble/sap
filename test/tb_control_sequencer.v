@@ -40,36 +40,33 @@ module tb_control_sequencer();
 
     initial begin
         clr = 1;
-        #10;
         clr = 0;
-        #10;
         op_code = 4'b0000;
-        #10;
-        op_code = 4'b0001;
-        #10;
-        op_code = 4'b0010;
-        #10;
-        // op_code = 4'b1110;
-        // #10;
-        op_code = 4'b1111;
-        #10;
         $finish;
     end
 
+    // initial
+    // begin
+    //     $dumpfile("")
+    // end
+
     initial
-    $monitor("inc = %b\t pc_out_en = %b\t low_ld_mar = %b\t low_mem_out_en = %b\t low_ld_ir = %b\t low_ir_out_en = %b\t low_ld_acc = %b\t acc_out_en = %b\t sub_add = %b\t subadd_out_en = %b\t low_ld_b_reg = %b\t low_ld_out_req = %b\t low_halt = %b\n",
-        inc,
-        pc_out_en,
-        low_ld_mar,
-        low_mem_out_en,
-        low_ld_ir,
-        low_ir_out_en,
-        low_ld_acc,
-        acc_out_en,
-        sub_add,
-        subadd_out_en,
-        low_ld_b_reg,
-        low_ld_out_reg,
-        low_halt
-    );
+    begin
+        $monitor("op_code:%b\n inc = %b\t pc_out_en = %b\t low_ld_mar = %b\t low_mem_out_en = %b\t low_ld_ir = %b\t low_ir_out_en = %b\t low_ld_acc = %b\t acc_out_en = %b\t sub_add = %b\t subadd_out_en = %b\t low_ld_b_reg = %b\t low_ld_out_req = %b\t low_halt = %b\n",
+            op_code,
+            inc,
+            pc_out_en,
+            low_ld_mar,
+            low_mem_out_en,
+            low_ld_ir,
+            low_ir_out_en,
+            low_ld_acc,
+            acc_out_en,
+            sub_add,
+            subadd_out_en,
+            low_ld_b_reg,
+            low_ld_out_reg,
+            low_halt
+        );
+    end
 endmodule
