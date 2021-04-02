@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-HDL_DIR="../hdl"
+HDL_DIR="./hdl"
+TEST_DIR="./test"
 
 compile()
 {
@@ -9,17 +10,12 @@ compile()
 }
 
 if [[ $# == 0 ]]; then
-    TEST_DIR="./test"
-
-    cd $TEST_DIR || exit 1
-
     echo -e "\033[1mCompiling all\n $1\033[0m"
 
-    for file in *.v; do
+    for file in $TEST_DIR/*.v; do
         compile $file
     done
 else
-    HDL_DIR="./hdl"
     for arg; do
         compile $arg
     done

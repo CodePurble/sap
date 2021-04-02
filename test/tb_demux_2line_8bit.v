@@ -6,7 +6,7 @@ module tb_demux_2line_8bit();
     demux_2line_8bit uut(in, sel, out0, out1);
     initial
     begin
-        $dumpfile("../simulation/tb_demux_2line_8bit.vcd");
+        $dumpfile("./simulation/tb_demux_2line_8bit.vcd");
         $dumpvars(0, tb_demux_2line_8bit);
         in = 7;
 

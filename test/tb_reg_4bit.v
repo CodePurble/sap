@@ -20,7 +20,7 @@ module tb_reg_4bit();
 
     initial
     begin
-        $dumpfile("../simulation/tb_reg_4bit.vcd");
+        $dumpfile("./simulation/tb_reg_4bit.vcd");
         $dumpvars(0, tb_reg_4bit);
 
         #2 async_reset = 1'b1;

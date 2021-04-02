@@ -7,7 +7,7 @@ module tb_tribuf_8bit;
 
     initial
     begin
-        $dumpfile("../simulation/tb_tribuf_8bit.vcd");
+        $dumpfile("./simulation/tb_tribuf_8bit.vcd");
         $dumpvars(0, tb_tribuf_8bit);
         in = 8'b11001100;
         low_enable = 1;
