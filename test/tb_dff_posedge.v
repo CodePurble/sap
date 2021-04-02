@@ -1,33 +1,34 @@
 module tb_dff_posedge;
-    reg d, clk, preset, clear;
-    wire q, qbar;
+    parameter w = 4;
+    reg [w - 1:0] d;
+    reg clk, clr;
+    wire [w - 1:0] q, qbar;
 
-    dff_posedge uut(.q(q), .qbar(qbar), .d(d), .preset(preset), .clear(clear), .clk(clk));
+    dff_posedge #(w) uut(.q(q), .qbar(qbar), .d(d), .clr(clr), .clk(clk));
 
     initial
     begin
         $dumpfile("./simulation/tb_dff_posedge.vcd");
         $dumpvars(0, tb_dff_posedge);
-        preset = 1'b1;
-        clear = 1'b1;
-        d = 1'b1;
+        clr = 1'b1;
+        d = 4'hf;
         #10;
 
-        clear = 1'b0;
-        d = 1'b0;
+        clr = 1'b0;
+        d = 4'h4;
         #10;
 
-        d = 1'b0;
+        d = 4'ha;
         #10;
 
-        d = 1'b1;
+        d = 4'hc;
         #10;
         $finish;
     end
 
     initial
     begin
-        clk = 1'b0;
+        clk = 1'b1;
         repeat(10)
         begin
             clk = ~clk;
@@ -37,6 +38,7 @@ module tb_dff_posedge;
 
     initial
     begin
-        $monitor("d = %b, clk = %b, q = %b", d, clk, q);
+        $monitor("d = %x, clk = %x, q = %x", d, clk, q);
     end
 endmodule
+
