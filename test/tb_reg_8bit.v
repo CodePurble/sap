@@ -7,7 +7,7 @@ module tb_reg_8bit;
 
     initial
     begin
-        $dumpfile("../simulation/tb_reg_8bit.vcd");
+        $dumpfile("./simulation/tb_reg_8bit.vcd");
         $dumpvars(0, tb_reg_8bit);
 
         async_reset = 1'b1;

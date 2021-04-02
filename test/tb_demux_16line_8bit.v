@@ -27,7 +27,7 @@ module tb_demux_16line_8bit();
     );
     initial
     begin
-        $dumpfile("../simulation/tb_demux_16line_8bit.vcd");
+        $dumpfile("./simulation/tb_demux_16line_8bit.vcd");
         $dumpvars(0, tb_demux_16line_8bit);
         in = 7;
 

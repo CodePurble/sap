@@ -17,7 +17,7 @@ module tb_program_counter();
 
     initial
     begin
-        $dumpfile("../simulation/tb_program_counter.vcd");
+        $dumpfile("./simulation/tb_program_counter.vcd");
         $dumpvars(0, tb_program_counter);
     end
 
