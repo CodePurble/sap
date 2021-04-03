@@ -5,7 +5,7 @@ module adder_sub_8(
     output cout,
     output [7:0] out
 );
-    wire [7:0] dmux0, dmux1, tc_out, B_in, add_sub_out, out_add_sub;
+    wire [7:0] dmux0, dmux1, tc_out, B_in, add_sub_out;
     parameter cin_adder = 1'b0;
 
     demux_2line_8bit demux1 (
@@ -28,4 +28,3 @@ module adder_sub_8(
         .low_enable(out_en)
     );
 endmodule
-
