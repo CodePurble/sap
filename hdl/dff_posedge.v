@@ -1,22 +1,24 @@
 module dff_posedge(
     clk,
     clr,
+    i_en,
     d,
     q,
     qbar
 );
     parameter DATA_WIDTH = 1;
     input [DATA_WIDTH - 1:0] d;
-    input clr, clk;
+    input i_en, clr, clk;
     output reg [DATA_WIDTH - 1:0] q;
     output [DATA_WIDTH - 1:0] qbar;
 
-    always @(posedge clk or clr)
+    always @(posedge clk or clr or i_en)
     begin
         if(clr)
             q <= 0;
         else
-            q <= d;
+            if(i_en)
+                q <= d;
     end
     assign qbar = ~q;
 

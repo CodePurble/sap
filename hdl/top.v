@@ -1,10 +1,13 @@
 module top(bus_high, bus_low, clk, out, clr);
-    output [3:0] bus_high, bus_low;
+    output tri [3:0] bus_high, bus_low;
     output [7:0] out;
     input clk, clr;
+
     // Globals
     wire [7:0] bus;
     wire buf_clk;
+    wire global_out_en;
+    assign global_out_en = 1'b0; // For registers that do not have tri-state output
 
     // Control signals
     wire inc, pc_out_en, low_ld_mar, low_mem_out_en, low_ld_ir, low_ir_out_en, low_halt;
@@ -49,7 +52,7 @@ module top(bus_high, bus_low, clk, out, clr);
     wire [7:0] ir_out;
     // output must be permanently enabled
     reg_8bit ir(
-        .in(bus), .out(ir_out), .low_i_en(low_ld_ir), .low_o_en(1'b0), .async_reset(clr), .clk(buf_clk)
+        .in(bus), .out(ir_out), .low_i_en(low_ld_ir), .low_o_en(global_out_en), .async_reset(clr), .clk(buf_clk)
     );
 
     tribuf_4bit buf0(.in(ir_out[3:0]), .out(bus[3:0]), .low_enable(low_ir_out_en));
@@ -58,7 +61,7 @@ module top(bus_high, bus_low, clk, out, clr);
 
     wire [7:0] acc_out;
     reg_8bit acc(
-        .in(bus), .out(acc_out), .low_i_en(low_ld_acc), .low_o_en(1'b0), .async_reset(clr), .clk(buf_clk)
+        .in(bus), .out(acc_out), .low_i_en(low_ld_acc), .low_o_en(global_out_en), .async_reset(clr), .clk(buf_clk)
     );
     wire low_acc_out_en;
     assign low_acc_out_en = ~acc_out_en;
@@ -66,13 +69,13 @@ module top(bus_high, bus_low, clk, out, clr);
 
     wire [7:0] b_reg_out;
     reg_8bit b_reg(
-        .in(bus), .out(b_reg_out), .low_i_en(low_ld_b_reg), .low_o_en(1'b0), .async_reset(clr), .clk(buf_clk)
+        .in(bus), .out(b_reg_out), .low_i_en(low_ld_b_reg), .low_o_en(global_out_en), .async_reset(clr), .clk(buf_clk)
     );
 
     adder_sub_8 asub(.A(acc_out), .B(b_reg_out), .sub(sub_add), .cout(), .out(bus), .out_en(subadd_out_en));
 
     reg_8bit out_reg(
-        .in(bus), .out(out), .low_i_en(low_ld_out_reg), .low_o_en(1'b0), .async_reset(clr), .clk(buf_clk)
+        .in(bus), .out(out), .low_i_en(low_ld_out_reg), .low_o_en(global_out_en), .async_reset(clr), .clk(buf_clk)
     );
     assign bus_low = bus[3:0];
     assign bus_high = bus[7:4];

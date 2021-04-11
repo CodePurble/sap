@@ -1,9 +1,9 @@
-module tb_top();
+module tb_top_rework();
     reg clk, clr;
     wire [7:0] out;
-    wire [3:0] bus_high, bus_low;
-    top uut(
-        .bus_low(bus_low), .clk(clk), .bus_high(bus_high), .clr(clr), .out(out)
+    wire [7:0] bus;
+    top_rework uut(
+        .bus(bus), .clk(clk), .clr(clr), .out(out)
     );
 
     initial
@@ -18,8 +18,8 @@ module tb_top();
 
     initial
     begin
-        $dumpfile("simulation/tb_top.vcd");
-        $dumpvars(0, tb_top);
+        $dumpfile("simulation/tb_top_rework.vcd");
+        $dumpvars(0, tb_top_rework);
     end
 
     initial

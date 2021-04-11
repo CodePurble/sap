@@ -3,9 +3,9 @@ module program_counter(
     output tri [3:0] out
 );
     reg [3:0] hold;
-    // wire not_pc_out_en;
-    // not (not_pc_out_en, pc_out_en);
-    tribuf_4bit tbuf(.in(hold), .out(out), .low_enable(pc_out_en));
+    wire not_pc_out_en;
+    not (not_pc_out_en, pc_out_en);
+    tribuf_4bit tbuf(.in(hold), .out(out), .low_enable(not_pc_out_en));
     always @(posedge clk or clr)
     begin
         if(clr)
