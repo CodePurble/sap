@@ -1,11 +1,21 @@
 module tb_dff_posedge;
     parameter w = 4;
     reg i_en;
-    reg [w - 1:0] d;
+    reg [w - 1:0] d0;
     reg clk, clr;
-    wire [w - 1:0] q, qbar;
+    wire [w - 1:0] q0, qbar0;
 
-    dff_posedge #(w) uut(.q(q), .qbar(qbar), .d(d),
+    reg [w - 1:0] d1;
+    wire [w - 1:0] q1, qbar1;
+
+    wire [7:0] concat;
+    assign concat = {q0, q1};
+
+    dff_posedge #(w) uut0(.q(q0), .qbar(qbar0), .d(d0),
+        .clr(clr), .clk(clk), .i_en(i_en)
+    );
+
+    dff_posedge #(w) uut1(.q(q1), .qbar(qbar1), .d(d1),
         .clr(clr), .clk(clk), .i_en(i_en)
     );
 
@@ -13,20 +23,25 @@ module tb_dff_posedge;
     begin
         $dumpfile("./simulation/tb_dff_posedge.vcd");
         $dumpvars(0, tb_dff_posedge);
-        clr = 1'b1;
-        i_en = 1'b0;
-        d = 4'hf;
-        #10;
-
         clr = 1'b0;
-        i_en = 1'b0;
-        d = 4'h4;
+        // i_en = 1'b0;
+        i_en = 1'b1;
+        d0 = 4'hf;
+        d1 = 4'he;
         #10;
 
-        d = 4'ha;
+        // clr = 1'b0;
+        // i_en = 1'b0;
+        d0 = 4'h4;
+        d1 = 4'he;
         #10;
 
-        d = 4'hc;
+        d0 = 4'ha;
+        d1 = 4'he;
+        #10;
+
+        d0 = 4'hc;
+        d1 = 4'he;
         #10;
         $finish;
     end
@@ -43,7 +58,8 @@ module tb_dff_posedge;
 
     initial
     begin
-        $monitor("d = %x, clk = %x, q = %x", d, clk, q);
+        $monitor("d0 = %x, clk = %x, q0 = %x", d0, clk, q0);
+        $monitor("d1 = %x, clk = %x, q1 = %x", d1, clk, q1);
     end
 endmodule
 
