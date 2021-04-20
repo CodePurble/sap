@@ -1,14 +1,15 @@
 module tb_top();
     reg clk, clr;
     wire [7:0] out;
-    wire [7:0] bus;
+    wire [3:0] bus_high;
+    wire [3:0] bus_low;
     top uut(
-        .bus(bus), .clk(clk), .clr(clr), .out(out)
+        .bus_high(bus_high), .bus_low(bus_low), .clk(clk), .clr(clr), .out(out)
     );
 
     initial
     begin
-        #10 clk = 1'b1;
+        #10 clk = 1'b0;
     end
 
     always
@@ -26,7 +27,7 @@ module tb_top();
     begin
         #2 clr = 1'b1;
         #6 clr = 1'b0;
-        #300 $finish;
+        #500 $finish;
     end
 
     initial

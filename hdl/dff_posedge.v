@@ -13,7 +13,7 @@ module dff_posedge(
     output reg [DATA_WIDTH - 1:0] q;
     output [DATA_WIDTH - 1:0] qbar;
 
-    always @(posedge clk or clr or i_en)
+    always @(posedge clk or clr)
     begin
         if(clr)
             q <= 0;

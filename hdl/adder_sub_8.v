@@ -20,11 +20,13 @@ module adder_sub_8(
     );
     adder_ripple_8bit r1(
         .a(A), .b(B_in), .cin(cin_adder),
-        .sum(out), .cout(cout)
+        .sum(add_sub_out), .cout(cout)
     );
+
+    wire add_sub_low_out_en = ~out_en;
 
     tribuf_8bit tri8(
         .in(add_sub_out), .out(out),
-        .low_enable(out_en)
+        .low_enable(add_sub_low_out_en)
     );
 endmodule
