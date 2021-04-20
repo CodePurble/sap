@@ -1,13 +1,10 @@
-module top(bus_high, bus_low, clk, out, clr);
-    output tri [3:0] bus_high, bus_low;
+module top(bus, clk, out, clr);
+    output tri [7:0] bus;
     output [7:0] out;
     input clk, clr;
-
     // Globals
-    wire [7:0] bus;
+    wire [3:0] bus_high, bus_low;
     wire buf_clk;
-    wire global_out_en;
-    assign global_out_en = 1'b0; // For registers that do not have tri-state output
 
     // Control signals
     wire inc, pc_out_en, low_ld_mar, low_mem_out_en, low_ld_ir, low_ir_out_en, low_halt;
@@ -36,13 +33,14 @@ module top(bus_high, bus_low, clk, out, clr);
     bufif1(buf_clk, clk, low_halt);
 
     program_counter pc(
-        .inc(inc), .clk(buf_clk), .pc_out_en(pc_out_en), .clr(clr), .out(bus[3:0])
+        .inc(inc), .clk(buf_clk), .pc_out_en(pc_out_en), .clr(clr), .out(bus_low)
     );
 
     wire [3:0] mar_out;
-    reg_4bit mar(
-        .in(bus[3:0]), .out(mar_out), .low_i_en(low_ld_mar),
-        .async_reset(clr), .clk(buf_clk)
+    wire ld_mar;
+    not (ld_mar, low_ld_mar);
+    dff_posedge #(4) mar(
+        .d(bus_low), .q(mar_out), .i_en(ld_mar), .clr(clr), .clk(buf_clk)
     );
 
     rom16_8bit mem(
@@ -50,33 +48,40 @@ module top(bus_high, bus_low, clk, out, clr);
     );
 
     wire [7:0] ir_out;
-    // output must be permanently enabled
-    reg_8bit ir(
-        .in(bus), .out(ir_out), .low_i_en(low_ld_ir), .low_o_en(global_out_en), .async_reset(clr), .clk(buf_clk)
+    wire ld_ir;
+    not (ld_ir, low_ld_ir);
+    dff_posedge #(8) ir(
+        .d({bus_high, bus_low}), .q(ir_out), .i_en(ld_ir), .clr(clr), .clk(buf_clk)
     );
 
-    tribuf_4bit buf0(.in(ir_out[3:0]), .out(bus[3:0]), .low_enable(low_ir_out_en));
+    tribuf_4bit buf0(.in(ir_out[3:0]), .out(bus_low), .low_enable(low_ir_out_en));
     assign op_code = ir_out[7:4]; // Directly pass to control_sequencer
 
 
     wire [7:0] acc_out;
-    reg_8bit acc(
-        .in(bus), .out(acc_out), .low_i_en(low_ld_acc), .low_o_en(global_out_en), .async_reset(clr), .clk(buf_clk)
+    wire ld_acc;
+    not (ld_acc, low_ld_acc);
+    dff_posedge #(8) acc(
+        .d({bus_high, bus_low}), .q(acc_out), .i_en(ld_acc), .clr(clr), .clk(buf_clk)
     );
     wire low_acc_out_en;
     assign low_acc_out_en = ~acc_out_en;
-    tribuf_8bit buf1(.in(acc_out), .out(bus), .low_enable(low_acc_out_en));
+    tribuf_8bit buf1(.in(acc_out), .out({bus_high, bus_low}), .low_enable(low_acc_out_en));
 
     wire [7:0] b_reg_out;
-    reg_8bit b_reg(
-        .in(bus), .out(b_reg_out), .low_i_en(low_ld_b_reg), .low_o_en(global_out_en), .async_reset(clr), .clk(buf_clk)
+    wire ld_b_reg;
+    not (ld_b_reg, low_ld_b_reg);
+    dff_posedge #(8) b_reg(
+        .d({bus_high, bus_low}), .q(b_reg_out), .i_en(ld_b_reg), .clr(clr), .clk(buf_clk)
     );
 
-    adder_sub_8 asub(.A(acc_out), .B(b_reg_out), .sub(sub_add), .cout(), .out(bus), .out_en(subadd_out_en));
+    adder_sub_8 asub(.A(acc_out), .B(b_reg_out), .sub(sub_add), .cout(), .out({bus_high, bus_low}), .out_en(subadd_out_en));
 
-    reg_8bit out_reg(
-        .in(bus), .out(out), .low_i_en(low_ld_out_reg), .low_o_en(global_out_en), .async_reset(clr), .clk(buf_clk)
+    wire ld_out_reg;
+    not (ld_out_reg, low_ld_out_reg);
+    dff_posedge #(8) out_reg(
+        .d({bus_high, bus_low}), .q(out), .i_en(ld_out_reg), .clr(clr), .clk(buf_clk)
     );
-    assign bus_low = bus[3:0];
-    assign bus_high = bus[7:4];
+
+    assign bus = {bus_high, bus_low};
 endmodule

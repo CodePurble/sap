@@ -7,6 +7,7 @@ module dff_posedge(
     qbar
 );
     parameter DATA_WIDTH = 1;
+
     input [DATA_WIDTH - 1:0] d;
     input i_en, clr, clk;
     output reg [DATA_WIDTH - 1:0] q;
