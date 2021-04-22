@@ -135,5 +135,17 @@ $ ./run.sh
 # To run select files
 $ ./run.sh FILE1 FILE2 ...
 ```
-
 To open waveform dump (gtkwave is used here): `gtkwave <path-to-vcd-file>`
+
+## Inspiration 
+
+Inspired by [Ben Eater's](https://www.youtube.com/user/eaterbc) [8-bit Computer](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU)
+
+## More Information
+
++ [YouTube Playlist on SAP-1](https://www.youtube.com/playlist?list=PLbUnUWOWn7M8QmODC1wdVhVPlP_u4FwBc)
++ [Simulation of SAP-1](https://circuitverse.org/users/3903/projects/sap-1-6896132f-12e6-416f-afb9-b986b354eda3)
++ **Digital Computer Electronics** by Albert Paul Malvino & Jerald A. Brown
++ **Advanced Digital Design with the Verilog HDL** by Michael D. Ciletti
++ **Verilog HDL: A Guide To Digital Design & Synthesis** by Samir Palnitkar
+  
