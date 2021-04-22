@@ -1,5 +1,13 @@
 # SAP-1 Computer in Verilog HDL
 
+This is a **zero-delay** model.
+
+To edit the program, take a look at `hdl/rom16_8bit.v`. Currently, the programs reside in the ROM module.
+
+Sample output: 
+
+![Output Waveform](./img/waveform_output.png)
+
 ## Directory structure
 
 The following structure is followed:
