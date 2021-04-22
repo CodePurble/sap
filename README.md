@@ -4,7 +4,7 @@ This is a **zero-delay** model.
 
 To edit the program, take a look at `hdl/rom16_8bit.v`. Currently, the programs reside in the ROM module.
 
-Sample output: 
+Sample output:
 
 ![Output Waveform](./img/waveform_output.png)
 
@@ -24,7 +24,7 @@ The following structure is followed:
 -   All Verilog test-benches are located in the `test` directory
     -   Filenames for testbenches are prefixed with `tb`
         -   E.g. `dff_posedge.v -> tb_dff_posedge.v`
-    -   Output files (`*.out`) after compilation also are located in the `test` directory 
+    -   Output files (`*.out`) after compilation also are located in the `test` directory
 -   Waveform dumps are put in the `simulation` directory (create it if it
     doesn't exist).
 - Any images used are placed in the `img` directory
@@ -149,3 +149,11 @@ Inspired by [Ben Eater's](https://www.youtube.com/user/eaterbc) [8-bit Computer]
 + **Digital Computer Electronics** by Albert Paul Malvino & Jerald A. Brown
 + **Advanced Digital Design with the Verilog HDL** by Michael D. Ciletti
 + **Verilog HDL: A Guide To Digital Design & Synthesis** by Samir Palnitkar
+
+## Contributing
+
+* Fork this repo
+* Take a look at the [TODO](./TODO.md)
+* Keep the directory structure as it is.
+* Enable [editorconfig](https://editorconfig.org/) for your editor to take care of formatting
+* Keep commit messages concise and meaningful
