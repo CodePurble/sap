@@ -25,8 +25,7 @@ The following structure is followed:
     -   Filenames for testbenches are prefixed with `tb`
         -   E.g. `dff_posedge.v -> tb_dff_posedge.v`
     -   Output files (`*.out`) after compilation also are located in the `test` directory 
--   Waveform dumps are put in the `simulation` directory (create it if it
-    doesn't exist).
+-   Waveform dumps are located in the `simulation` directory.
 - Any images used are placed in the `img` directory
 
 ## Compilation
