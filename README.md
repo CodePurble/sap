@@ -1,19 +1,62 @@
 # SAP-1 Computer in Verilog HDL
 
-## Verilog HDL
+## Directory structure
 
-Verilog Hardware Description Language is a text-based description of a circuit. 
-It is used to compile the description to verify the logic and also simulate the logic to verify it's functionality.
+Below is the structure of how the verilog modules are arranged in this repository.
 
-+  Please use `iverilog` to compile and test the codes. To view waveforms, use a program like `gtkwave`.
+```
+    .
+    ├── README.md
+    ├── hdl
+    │   └── dff_posedge.v
+    ├── simulation
+    └── test
+        └── tb_dff_posedge.v
+```
+
+- All Verilog modules are located in the `hdl` directory
+    -   Only **ONE** Verilog module exists per `.v` file
+-   All Verilog test-benches are located in the `test` directory
+    -   Filenames should are prefixed with `tb`
+        -   E.g. `dff_posedge.v - tb_dff_posedge.v`
+    -   Output files (`.out`) after compilation also are located in the `test` directory.out` extension
+-   All Verilog simulation output (`vcd` dumps for waveforms etc.) are located in the `simulation` directory.
+
+## Compilation
+
+* `iverilog` is used to compile and test the code. To view waveforms, use a program like `gtkwave`.
+
+There are two helper scripts to simplify this step.
+
+To compile, use the `compile.sh` script. Usage is as follows:
+
+```sh
+# To compile all files in the test directory
+$ ./compile.sh
+
+# To compile select files
+$ ./compile.sh FILE1 FILE2 ...
+```
+
+To run compiled files, use the `run.sh` script.
+Usage is as follows:
+
+```sh
+# To run all compiled files in the test/ directory
+$ ./run.sh
+
+# To run select files
+$ ./run.sh FILE1 FILE2 ...
+```
+To open waveform dump (`gtkwave` is used here): `gtkwave <path-to-vcd-file>`
 
 ## Introduction to SAP
 
-SAP (Simple-As-Possible)-1 Computer is an 8-bit computer capable of performing simple operations such as add and subtract two numbers. 
+The SAP (Simple-As-Possible)-1 Computer is an 8-bit computer capable of performing simple operations such as add and subtract two numbers.
 
-SAP employs a processing unit (ALU + Registers), a control unit, memory to store data and instructions and a central bus. 
+The SAP-1 employs a processing unit (ALU + Registers), a control unit, memory to store data and instructions and a central bus.
 
-It is a **stored-program** computer in which fetch and execute cycles occur separately as they share a common bus. 
+It is a **stored-program** computer in which fetch and execute cycles occur separately as they share a common bus.
 
 It is built using the bottom-up approach where all the sub-modules are constructed initially and finally assembled to deploy a working computer.
 
@@ -21,14 +64,14 @@ It is built using the bottom-up approach where all the sub-modules are construct
 
 The figure below represents the architecture of SAP-1 computer.
 
-![SAP-1 Architecture]()
+![SAP-1 Architecture](./img/sap_arch.png)
 
 The architecture of SAP-1 has the following components:
 * Program Counter
-* Memory Address Register 
-* Memory 
+* Memory Address Register
+* Memory
 * Instruction Register
-* Controller-Sequencer 
+* Controller-Sequencer
 * Accumulator
 * Adder-Subtractor
 * B-Register
@@ -36,7 +79,7 @@ The architecture of SAP-1 has the following components:
 
 ## SAP-1 Instruction Set
 
-![Instruction]()
+![Instruction](./img/instr_breakdown.png)
 
 An instruction set is necessary to program the counter. The table below describes the functionality of each instruction.
 
@@ -48,9 +91,11 @@ An instruction set is necessary to program the counter. The table below describe
 |OUT|Load Accumulator data into Output Register|
 |HLT|Stop processing|
 
-## SAP-1 Op-Code
+### Op-Codes
 
-Each instruction has a binary equivalent op-code which must be loaded to the computer's memory. The table below represents each instruction along with it's op-code.
+Each instruction has a binary equivalent op-code which must be loaded to the
+computer's memory. The table below represents each instruction along with it's
+op-code.
 
 | Mnemonic | Op-code |
 |:---:|:---:|
@@ -64,18 +109,18 @@ Each instruction has a binary equivalent op-code which must be loaded to the com
 
 ### The Fetch & Execute Cycle
 
-Every instruction and required data has to be fetched from the memory. 
+Every instruction and required data has to be fetched from the memory.
 
 Correspondingly, the processor executes the instruction and outputs the result using the output register.
 
 This process happens in two cycles, i.e. Fetch & Execute across six different timing states accounted by a 6-bit ring-counter (first three states for Fetch Cycle and next three for the Execute Cycle).
 
-![T States]()
+![T States](./t_states.PNG)
 
-## Control signals
+### Control signals
 
-The controller-sequencer outputs `12` different control signals which are key to the computer's automatic operation. 
-Every signal supervises and tells the computer about what needs to be done at what stage. 
+The controller-sequencer outputs `12` different control signals which are key to the computer's automatic operation.
+Every signal supervises and tells the computer about what needs to be done at what stage.
 All the signals are listed below:
 
 + `inc` = INCREMENT
@@ -92,52 +137,7 @@ All the signals are listed below:
 + `low_ld_out_req` = LOAD OUTPUT REGISTER
 + `low_halt` = HALT EXECUTION
 
-## Directory structure
-
-    Below is the structure of how the verilog modules are arranged in this repository.
-    .
-    ├── README.md
-    ├── hdl
-    │   └── dff_posedge.v
-    ├── simulation
-    └── test
-        └── tb_dff_posedge.v
-
--   All Verilog modules are located in the `hdl` directory
-    -   Only **ONE** Verilog module exists per `.v` file
--   All Verilog test-benches are located in the `test` directory
-    -   Filenames should are prefixed with `tb`
-        -   E.g. `dff_posedge.v - tb_dff_posedge.v`
-    -   Output files (`.out`) after compilation also are located in the `test` directory.out` extension
--   All Verilog simulation output (`vcd` dumps for waveforms etc.) are located in the `simulation` directory.
-
-## Compilation
-
-There are two helper scripts to simplify this step.
-
-To compile, use the `compile.sh` script. Usage is as follows:
-
-``` {.sh}
-# To compile all files in the test directory
-$ ./compile.sh
-
-# To compile select files
-$ ./compile.sh FILE1 FILE2 ...
-```
-
-To run compiled files, use the `run.sh` script. 
-Usage is as follows:
-
-``` {.sh}
-# To run all compiled files in the test/ directory
-$ ./run.sh
-
-# To run select files
-$ ./run.sh FILE1 FILE2 ...
-```
-To open waveform dump (gtkwave is used here): `gtkwave <path-to-vcd-file>`
-
-## Inspiration 
+## Inspiration
 
 Inspired by [Ben Eater's](https://www.youtube.com/user/eaterbc) [8-bit Computer](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU)
 
@@ -148,4 +148,3 @@ Inspired by [Ben Eater's](https://www.youtube.com/user/eaterbc) [8-bit Computer]
 + **Digital Computer Electronics** by Albert Paul Malvino & Jerald A. Brown
 + **Advanced Digital Design with the Verilog HDL** by Michael D. Ciletti
 + **Verilog HDL: A Guide To Digital Design & Synthesis** by Samir Palnitkar
-  
