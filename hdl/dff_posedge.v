@@ -1,21 +1,26 @@
-// D-FF with asynchronous preset and clear
-module dff_posedge(q, qbar, d, preset, clear, clk);
-	input d; // D input
-	input preset; // Asynchrounous preset input
-	input clear; // Asynchrounous clear control signal
-	input clk; // Clock
-	output reg q;
-	output qbar;
+module dff_posedge(
+    clk,
+    clr,
+    i_en,
+    d,
+    q,
+    qbar
+);
+    parameter DATA_WIDTH = 1;
 
-	assign qbar = ~q;
+    input [DATA_WIDTH - 1:0] d;
+    input i_en, clr, clk;
+    output reg [DATA_WIDTH - 1:0] q;
+    output [DATA_WIDTH - 1:0] qbar;
 
-	always @(posedge clk or preset or clear)
-	begin
-		if(clear)
-			q <= 1'b0;
-		else if(preset)
-			q <= 1'b1;
-		else
-			q <= d;
-	end
+    always @(posedge clk or clr)
+    begin
+        if(clr)
+            q <= 0;
+        else
+            if(i_en)
+                q <= d;
+    end
+    assign qbar = ~q;
+
 endmodule

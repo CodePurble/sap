@@ -1,5 +1,4 @@
 module tb_ring_counter;
-
     // Inputs
     reg clk_tb;
     reg res_tb;
@@ -9,16 +8,17 @@ module tb_ring_counter;
 
     // Instantiate the Unit Under Test (UUT)
     ring_counter uut (
-        .clk(clk_tb), 
-        .res(res_tb), 
+        .clk(clk_tb),
+        .res(res_tb),
         .t(t_tb)
     );
-    
-    initial clk_tb = 1; 
-    always #10 clk_tb = ~clk_tb; 
-    
+
+    initial clk_tb = 1;
+    always #10 clk_tb = ~clk_tb;
+
     //Simulation inputs.
-    initial begin
+    initial
+    begin
     //Apply res_tb for 50 ns.
         res_tb = 1; //res_tb is high
         #10;
@@ -29,5 +29,4 @@ module tb_ring_counter;
 
     initial
         $monitor("%b",t_tb);
-      
 endmodule

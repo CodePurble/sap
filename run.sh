@@ -1,25 +1,24 @@
 #!/usr/bin/env bash
+TEST_DIR="./test"
 
 run()
 {
-	echo -e "\033[1;33mRunning $1\033[0m"
-	vvp $1
+    echo -e "\033[1;33mRunning $1\033[0m"
+    vvp "$1"
 }
 
 [[ -d simulation ]] || mkdir simulation
 
 if [[ $# == 0 ]]; then
-	TEST_DIR="./test"
 
-	cd $TEST_DIR || exit 1
+    echo -e "\033[1mRunning all testbenches\n $1\033[0m"
 
-	echo -e "\033[1mBuilding all\n $1\033[0m"
-
-	for file in *.out; do
-		run $file
-	done
+    for file in "$TEST_DIR"/*.out; do
+        run $file
+    done
 else
-	for arg; do
-		run $arg
-	done
+    for arg; do
+        cd "$(dirname arg)" || exit
+        run $arg
+    done
 fi
