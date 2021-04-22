@@ -2,25 +2,24 @@
 
 ## Directory structure
 
-Below is the structure of how the verilog modules are arranged in this repository.
+The following structure is followed:
 
 ```
     .
-    ├── README.md
     ├── hdl
-    │   └── dff_posedge.v
-    ├── simulation
-    └── test
-        └── tb_dff_posedge.v
+    ├── test
+    └── img
 ```
 
 - All Verilog modules are located in the `hdl` directory
     -   Only **ONE** Verilog module exists per `.v` file
 -   All Verilog test-benches are located in the `test` directory
-    -   Filenames should are prefixed with `tb`
-        -   E.g. `dff_posedge.v - tb_dff_posedge.v`
-    -   Output files (`.out`) after compilation also are located in the `test` directory.out` extension
--   All Verilog simulation output (`vcd` dumps for waveforms etc.) are located in the `simulation` directory.
+    -   Filenames for testbenches are prefixed with `tb`
+        -   E.g. `dff_posedge.v -> tb_dff_posedge.v`
+    -   Output files (`*.out`) after compilation also are located in the `test` directory.out` extension
+-   Waveform dumps are put in the `simulation` directory (create it if it
+    doesn't exist).
+- Any images used are placed in the `img` directory
 
 ## Compilation
 
@@ -34,7 +33,7 @@ To compile, use the `compile.sh` script. Usage is as follows:
 # To compile all files in the test directory
 $ ./compile.sh
 
-# To compile select files
+# To compile specific files
 $ ./compile.sh FILE1 FILE2 ...
 ```
 
@@ -45,22 +44,26 @@ Usage is as follows:
 # To run all compiled files in the test/ directory
 $ ./run.sh
 
-# To run select files
+# To run compiled files
 $ ./run.sh FILE1 FILE2 ...
 ```
 To open waveform dump (`gtkwave` is used here): `gtkwave <path-to-vcd-file>`
 
-## Introduction to SAP
+## Introduction to the SAP-1
 
-The SAP (Simple-As-Possible)-1 Computer is an 8-bit computer capable of performing simple operations such as add and subtract two numbers.
+- The SAP (Simple-As-Possible)-1 Computer is an 8-bit computer capable of
+  performing simple operations such as add and subtract two numbers.
 
-The SAP-1 employs a processing unit (ALU + Registers), a control unit, memory to store data and instructions and a central bus.
+- The SAP-1 employs a processing unit (ALU + Registers), a control unit, memory
+  to store data and instructions and a central bus.
 
-It is a **stored-program** computer in which fetch and execute cycles occur separately as they share a common bus.
+- It is a **stored-program** computer in which fetch and execute cycles occur
+  separately as they share a common bus.
 
-It is built using the bottom-up approach where all the sub-modules are constructed initially and finally assembled to deploy a working computer.
+- It is built using the bottom-up approach where all the sub-modules are
+  constructed initially and finally assembled to deploy a working computer.
 
-## SAP-1 Architecture
+## The architecture
 
 The figure below represents the architecture of SAP-1 computer.
 
@@ -77,35 +80,25 @@ The architecture of SAP-1 has the following components:
 * B-Register
 * Output Register
 
-## SAP-1 Instruction Set
+## The instruction set
+
+> "When software talks to hardware, it has a vocabulary. The words are called
+> instructions, and the vocabulary is called the Instruction Set Architecture
+> (ISA)"
+>
+> -- David Patterson
 
 ![Instruction](./img/instr_breakdown.png)
 
-An instruction set is necessary to program the counter. The table below describes the functionality of each instruction.
+| Mnemonic | Operation | Op-code |
+|:---:|:---:|:---:
+|LDA|Load RAM data into Accumulator|0000|
+|ADD|Add RAM data into Accumulator|0001|
+|SUB|Subtract RAM data from Accumulator|0010|
+|OUT|Load Accumulator data into Output Register|1110|
+|HLT|Stop processing|1111|
 
-| Mnemonic | Operation |
-|:---:|:---:|
-|LDA|Load RAM data into Accumulator|
-|ADD|Add RAM data into Accumulator|
-|SUB|Subtract RAM data from Accumulator|
-|OUT|Load Accumulator data into Output Register|
-|HLT|Stop processing|
-
-### Op-Codes
-
-Each instruction has a binary equivalent op-code which must be loaded to the
-computer's memory. The table below represents each instruction along with it's
-op-code.
-
-| Mnemonic | Op-code |
-|:---:|:---:|
-|LDA|0000|
-|ADD|0001|
-|SUB|0010|
-|OUT|1110|
-|HLT|1111|
-
-## SAP-1 Working
+## Working
 
 ### The Fetch & Execute Cycle
 
@@ -113,7 +106,7 @@ Every instruction and required data has to be fetched from the memory.
 
 Correspondingly, the processor executes the instruction and outputs the result using the output register.
 
-This process happens in two cycles, i.e. Fetch & Execute across six different timing states accounted by a 6-bit ring-counter (first three states for Fetch Cycle and next three for the Execute Cycle).
+This process happens in two cycles, i.e. Fetch & Execute across six different timing states accounted by a 6-bit ring-counter.
 
 ![T States](./img/t_states.PNG)
 
