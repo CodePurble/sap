@@ -115,7 +115,7 @@ Correspondingly, the processor executes the instruction and outputs the result u
 
 This process happens in two cycles, i.e. Fetch & Execute across six different timing states accounted by a 6-bit ring-counter (first three states for Fetch Cycle and next three for the Execute Cycle).
 
-![T States](./t_states.PNG)
+![T States](./img/t_states.PNG)
 
 ### Control signals
 
