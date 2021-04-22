@@ -152,7 +152,7 @@ Inspired by [Ben Eater's](https://www.youtube.com/user/eaterbc) [8-bit Computer]
 
 ## Contributing
 
-* Fork this repo
+* Fork this repo, and create a new branch for the feature you are developing
 * Take a look at the [TODO](./TODO.md)
 * Keep the directory structure as it is.
 * Enable [editorconfig](https://editorconfig.org/) for your editor to take care of formatting
