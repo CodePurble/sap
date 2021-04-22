@@ -12,12 +12,12 @@ compile()
 if [[ $# == 0 ]]; then
     echo -e "\033[1mCompiling all\n $1\033[0m"
 
-    for file in $TEST_DIR/*.v; do
-        compile $file
+    for file in "$TEST_DIR"/*.v; do
+        compile "$file"
     done
 else
     for arg; do
-        compile $arg
+        compile "$arg"
     done
 fi
 
