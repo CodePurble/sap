@@ -6,7 +6,7 @@ module program_counter(
     wire not_pc_out_en;
     not (not_pc_out_en, pc_out_en);
     tribuf_4bit tbuf(.in(hold), .out(out), .low_enable(not_pc_out_en));
-    always @(posedge clk or clr)
+    always @(posedge clk or posedge clr)
     begin
         if(clr)
             hold <= 4'b0000;

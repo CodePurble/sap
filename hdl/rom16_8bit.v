@@ -1,7 +1,7 @@
 module rom16_8bit(
     input [3:0] addr,
     input low_o_en,
-    output tri reg [7:0] data_out
+    output reg [7:0] data_out
 );
     always @(addr or low_o_en)
     begin

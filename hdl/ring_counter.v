@@ -4,7 +4,7 @@ module ring_counter (t, clk, res);
     input clk, res;
     output reg [5:0] t = 6'b100000;
 
-    always @(negedge clk or res)
+    always @(negedge clk or posedge res)
     begin
         if(res == 1)
             t = 6'b100000;

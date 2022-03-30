@@ -1,3 +1,10 @@
+/* function void print_vals() */
+/*     $monitor( */
+/*         "a:%x | b:%x | cin:%x | sum:%x | cout:%x", */
+/*         uut.a, uut.b, uut.cin, uut.sum, uut.cout */
+/*     ); */
+/* endfunction */
+
 module tb_ripple_carry_8bit();
     reg [7:0] a, b;
     reg cin;
