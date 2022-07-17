@@ -1,4 +1,4 @@
-# SAP-1 Computer in Verilog HDL
+# RTL-to-GDSII for the SAP-1 Computer
 
 This design is GDSII ready (although there are a few `MAX_FANOUT` violations to
 sort out) using the [SkyWater 130nm
