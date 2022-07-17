@@ -1,12 +1,32 @@
 # SAP-1 Computer in Verilog HDL
 
-This is a **zero-delay** model.
+This design is GDSII ready (although there are a few `MAX_FANOUT` violations to
+sort out) using the [SkyWater 130nm
+PDK](https://github.com/google/skywater-pdk) and the
+[OpenLane](https://github.com/The-OpenROAD-Project/OpenLane) RTL-to-GDSII flow
+that is part of the [OpenROAD
+project](https://github.com/The-OpenROAD-Project/OpenROAD).
 
-To edit the program, take a look at `hdl/rom16_8bit.v`. Currently, the programs reside in the ROM module.
+To run the flow yourself,
+* Set up the environment as shown in the OpenLane
+  [documentation](https://openlane.readthedocs.io/).
+* Use the provided
+  [`config.tcl`](./config.tcl).
+* Copy the contents of the
+  [`hdl/`](./hdl) directory to the
+  `src/` directory in your OpenLane design environment.
 
-Sample output:
+|![layout](./img/sap_top_layout_gds.png)|
+|:-:|
+|[Klayout](https://www.klayout.de/doc.html) GDSII view|
 
-![Output Waveform](./img/waveform_output.png)
+Edit the contents of
+[`hdl/rom16_8bit.v`](./hdl/rom16_8bit.v)
+to change the program as this computer is programmed directly in ROM.
+
+|![waveform](./img/waveform_output.png)|
+|:-:|
+|Waveform output for default program|
 
 ## Directory structure
 
@@ -75,7 +95,10 @@ To open waveform dump (`gtkwave` is used here): `gtkwave <path-to-vcd-file>`
 
 The figure below represents the architecture of SAP-1 computer.
 
-![SAP-1 Architecture](./img/sap_arch.png)
+
+|![SAP-1 Architecture](./img/sap_arch.png)|
+|:-:|
+|SAP-1 Architecture|
 
 The architecture of SAP-1 has the following components:
 * Program Counter
@@ -99,7 +122,7 @@ The architecture of SAP-1 has the following components:
 ![Instruction](./img/instr_breakdown.png)
 
 | Mnemonic | Operation | Op-code |
-|:---:|:---:|:---:
+|:---:|:---:|:---:|
 |LDA|Load RAM data into Accumulator|0000|
 |ADD|Add RAM data into Accumulator|0001|
 |SUB|Subtract RAM data from Accumulator|0010|
@@ -116,7 +139,9 @@ Correspondingly, the processor executes the instruction and outputs the result u
 
 This process happens in two cycles, i.e. Fetch & Execute across six different timing states accounted by a 6-bit ring-counter.
 
-![T States](./img/t_states.PNG)
+|![T States](./img/t_states.PNG)|
+|:-:|
+|"T-states" (timing states)|
 
 ### Control signals
 
@@ -124,19 +149,19 @@ The controller-sequencer outputs `12` different control signals which are key to
 Every signal supervises and tells the computer about what needs to be done at what stage.
 All the signals are listed below:
 
-+ `inc` = INCREMENT
-+ `pc_out_en` = OUTPUT ENABLE OF PROGRAM COUNTER
-+ `low_ld_mar` = LOAD MAR
-+ `low_mem_out_en` = CHIP ENABLE FOR RAM
-+ `low_ld_ir` = LOAD INSTRUCTION REGISTER
-+ `low_ir_out_en` = OUTPUT ENABLE OF INSTRUCTION REGISTER
-+ `low_ld_acc` = LOAD ACCUMULATOR
-+ `acc_out_en` = OUTPUT ENABLE OF ACCUMULATOR
-+ `sub_add` = SUBTRACTION/ADDITION
-+ `subadd_out_en` = OUTPUT ENABLE OF SUBTRACTION/ADDITION
-+ `low_ld_b_reg` = LOAD B REGISTER
-+ `low_ld_out_req` = LOAD OUTPUT REGISTER
-+ `low_halt` = HALT EXECUTION
+* `inc` = INCREMENT
+* `pc_out_en` = OUTPUT ENABLE OF PROGRAM COUNTER
+* `low_ld_mar` = LOAD MAR
+* `low_mem_out_en` = CHIP ENABLE FOR RAM
+* `low_ld_ir` = LOAD INSTRUCTION REGISTER
+* `low_ir_out_en` = OUTPUT ENABLE OF INSTRUCTION REGISTER
+* `low_ld_acc` = LOAD ACCUMULATOR
+* `acc_out_en` = OUTPUT ENABLE OF ACCUMULATOR
+* `sub_add` = SUBTRACTION/ADDITION
+* `subadd_out_en` = OUTPUT ENABLE OF SUBTRACTION/ADDITION
+* `low_ld_b_reg` = LOAD B REGISTER
+* `low_ld_out_req` = LOAD OUTPUT REGISTER
+* `low_halt` = HALT EXECUTION
 
 ## Inspiration
 
@@ -144,11 +169,14 @@ Inspired by [Ben Eater's](https://www.youtube.com/user/eaterbc) [8-bit Computer]
 
 ## More Information
 
-+ [YouTube Playlist on SAP-1](https://www.youtube.com/playlist?list=PLbUnUWOWn7M8QmODC1wdVhVPlP_u4FwBc)
-+ [Simulation of SAP-1](https://circuitverse.org/users/3903/projects/sap-1-6896132f-12e6-416f-afb9-b986b354eda3)
-+ **Digital Computer Electronics** by Albert Paul Malvino & Jerald A. Brown
-+ **Advanced Digital Design with the Verilog HDL** by Michael D. Ciletti
-+ **Verilog HDL: A Guide To Digital Design & Synthesis** by Samir Palnitkar
+* [YouTube Playlist on SAP-1](https://www.youtube.com/playlist?list=PLbUnUWOWn7M8QmODC1wdVhVPlP_u4FwBc)
+* [Simulation of SAP-1](https://circuitverse.org/users/3903/projects/sap-1-6896132f-12e6-416f-afb9-b986b354eda3)
+* **Digital Computer Electronics** by Albert Paul Malvino & Jerald A. Brown
+* **Advanced Digital Design with the Verilog HDL** by Michael D. Ciletti
+* **Verilog HDL: A Guide To Digital Design & Synthesis** by Samir Palnitkar
+* [OpenROAD website](https://theopenroadproject.org/)
+* [OpenLane documentation](https://openlane.readthedocs.io/)
+* [Google SkyWater PDK documentation](https://skywater-pdk.readthedocs.io/en/main/)
 
 ## Contributing
 
