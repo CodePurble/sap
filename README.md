@@ -16,9 +16,10 @@ To run the flow yourself,
   [`hdl/`](./hdl) directory to the
   `src/` directory in your OpenLane design environment.
 
-|![layout](./img/sap_top_layout_gds.png)|
+|[![layout](./img/sap_top_layout_gds.png)](https://raw.githubusercontent.com/CodePurble/sap/master/img/sap_top_layout_gds.png)|
 |:-:|
 |[Klayout](https://www.klayout.de/doc.html) GDSII view|
+|:sparkles: Thanks to [GDS2WebGL](https://github.com/s-holst/GDS2WebGL), you can **view and explore** GDSII layouts in the browser (even on mobile)!! :sparkles: **[Check it out!](https://codepurble.github.io/sap/sapgds.html)**|
 
 Edit the contents of
 [`hdl/rom16_8bit.v`](./hdl/rom16_8bit.v)
