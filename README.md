@@ -186,3 +186,7 @@ Inspired by [Ben Eater's](https://www.youtube.com/user/eaterbc) [8-bit Computer]
 * Keep the directory structure as it is.
 * Enable [editorconfig](https://editorconfig.org/) for your editor to take care of formatting
 * Keep commit messages concise and meaningful
+
+## License
+
+This project is licensed using the [GPL-v3](https://github.com/CodePurble/sap/blob/master/LICENSE) license
